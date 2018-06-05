@@ -20,6 +20,10 @@ def scrape():
 @app.route("/")
 def home():
     
+    info = list(collection.find())
+    
+    return render_template("index.html", info=info)
+    
 
     
 

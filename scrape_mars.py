@@ -44,8 +44,6 @@ def soupify(url):
 
 def scrape():
     
-    results = {}
-
     soup1 = soupify(url1)
     soup2 = soupify(url2)
     soup3 = soupify(url3)
@@ -64,9 +62,6 @@ def scrape():
 
     news_title = soup1.find("div", class_="content_title").text.strip()
     news_p = soup1.find("div", class_="article_teaser_body").text.strip()
-    
-    results[news_title] = news_title
-    results[news_p] = news_p
 
 
     # In[7]:
@@ -91,8 +86,6 @@ def scrape():
 
 
     featured_image_url = "https://www.jpl.nasa.gov" + featured_image_url
-    
-    results[featured_image_url] = featured_image_url
 
 
     # In[11]:
@@ -106,8 +99,6 @@ def scrape():
 
     mars_weather = soup3.find("p", class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
     
-    results[mars_weather] = mars_weather
-
 
     # In[13]:
 
@@ -154,8 +145,6 @@ def scrape():
 
     facts_html = facts_df.to_html()
     
-    results[facts_html] = facts_html
-
 
     # In[19]:
 
@@ -192,9 +181,15 @@ def scrape():
     # In[28]:
 
 
-    hemi_image_urls
+results = {}
+results["news_title"] = news_title
+results["news_p"] = news_p
+results["featured_image_url"] = featured_image_url
+results["mars_weather"] = mars_weather
+results["facts_html"] = facts_html
+results["hemi_image_urls"] = hemi_image_urls
+
     
-    results[hemi_image_urls] = hemi_image_urls
     
     return results
 
