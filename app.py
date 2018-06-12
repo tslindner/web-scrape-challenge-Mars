@@ -12,7 +12,10 @@ app = Flask(__name__)
 
 
 @app.route("/scrape")
-def scrape():
+def scraper():
+
+    collection.drop()
+
     results = scrape()
     
     collection.insert_one(results)

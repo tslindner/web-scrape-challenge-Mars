@@ -109,8 +109,7 @@ def scrape():
     # In[14]:
 
 
-    mars_facts_dict = {"Fields": [],
-                      "Values": []}
+    mars_facts_dict = {}
 
 
     # In[15]:
@@ -127,23 +126,13 @@ def scrape():
         field = mars_facts[i].find_all("td")[0].text.strip()
         value = mars_facts[i].find_all("td")[1].text.strip()
 
-
-
-        mars_facts_dict["Fields"].append(field)
-        mars_facts_dict["Values"].append(value)
+        field = field.replace(" ", "_")
+        field = field[:-1]
 
 
 
-    # In[17]:
+        mars_facts_dict[field] = value
 
-
-    facts_df = pd.DataFrame(mars_facts_dict)
-
-
-    # In[18]:
-
-
-    facts_html = facts_df.to_html()
     
 
     # In[19]:
@@ -181,15 +170,19 @@ def scrape():
     # In[28]:
 
 
-results = {}
-results["news_title"] = news_title
-results["news_p"] = news_p
-results["featured_image_url"] = featured_image_url
-results["mars_weather"] = mars_weather
-results["facts_html"] = facts_html
-results["hemi_image_urls"] = hemi_image_urls
+    results = {}
+    results["news_title"] = news_title
+    results["news_p"] = news_p
+    results["featured_image_url"] = featured_image_url
+    results["mars_weather"] = mars_weather
+    results["facts"] = mars_facts_dict
+    results["hemi_image_urls"] = hemi_image_urls
+    results["hemi_0"] = hemi_image_urls[0]
+    results["hemi_1"] = hemi_image_urls[1]
+    results["hemi_2"] = hemi_image_urls[2]
+    results["hemi_3"] = hemi_image_urls[3]
 
-    
-    
+        
+        
     return results
 

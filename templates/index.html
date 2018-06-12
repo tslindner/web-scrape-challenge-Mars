@@ -5,26 +5,170 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <!-- <link rel="stylesheet" href="../stylesheets/style.css"> -->
 </head>
 
 <body>
     <div class="container text-center">
-            <h1 class="jumbotron">Inventory</h1>
-            <div>
-                {% for item in info %}
-                <div class="col-lg-4">
-                    <div class="card" style="width: 20rem;">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ item.type }}</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">Cost: {{ item.cost }}</h6>
-                            <p class="card-text">Potential Revenue: {{ item.cost * item.stock}}</p>
-                        </div>
+        <div class="jumbotron">
+            <h1>Mission to Mars</h1>
+            <a href="/scrape" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Scrape</a>
+        </div>
+            {% for item in info %}
+            <h2 class="text-left"> Latest Mars News</h2> <br>
+            <h3 class="text-left">{{ item.news_title }}</h3> <br>
+            <h4 class="text-left">{{ item.news_p }}</h4>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Featured JPL image</h1>
+                    <img class="img-responsive" src= {{ item.featured_image_url }} alt="Current image from JPL"/>
+                </div>
+                <div class="col-md-4">
+                    <div class="weather_box">
+                        <h2>
+                            Current weather on mars
+                        </h2>
+                        <p>
+                            {{ item.mars_weather }}
+                        </p>
                     </div>
                 </div>
-                    {% endfor %}
-        
+                <div class="col-md-4">
+                    <h2>
+                        Mars Facts
+                    </h2>
+
+                    <table border="1" class="dataframe"> 
+                        <thead> 
+                            <tr style="text-align: right;"> 
+                                <th>
+
+                                </th> 
+                                <th>Fields</th> 
+                                <th>Values</th> 
+                            </tr> 
+                        </thead> 
+                        <tbody> 
+                            <tr> 
+                                <th>0</th> 
+                                <td>Equatorial Diameter:</td> 
+                                <td>{{ item.facts.Equatorial_Diameter }}</td> 
+                            </tr> 
+
+                            <tr> 
+                                <th>1</th> 
+                                <td>Polar Diameter:</td> 
+                                <td>{{ item.facts.Polar_Diameter }}</td> 
+                            </tr> 
+
+                            <tr> 
+                                <th>2</th> 
+                                <td>Mass:</td> 
+                                <td>{{ item.facts.Mass }}</td> 
+                            </tr> 
+
+                            <tr> 
+                                <th>
+                                    3
+                                </th> 
+                                <td>
+                                    Moons:
+                                </td>
+                                 <td>
+                                    {{ item.facts.Moons }}
+                                </td> 
+                            </tr> 
+
+                            <tr> 
+                                <th>
+                                    4
+                                </th>
+                                 <td>
+                                    Orbit Distance:
+                                </td>
+                                <td>
+                                    {{ item.facts.Orbit_Distance }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>
+                                    5
+                                </th>
+                                <td>
+                                    Orbit Period:
+                                </td>
+                                <td>
+                                    {{ item.facts.Orbit_Period }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>
+                                    6
+                                </th>
+                                <td>
+                                    Surface Temperature:
+                                </td>
+                                <td>
+                                    {{ item.facts.Surface_Temperature }}
+                                </td>
+                            </tr>
+                                    
+                            <tr>
+                                <th>
+                                    7
+                                </th>
+                                    
+                                <td>
+                                    First Record:
+                                </td>
+                                    
+                                <td>
+                                    {{ item.facts.First_Record }}
+                                </td>
+                                
+                            </tr>
+                                
+                            <tr>
+                                <th>
+                                    8
+                                </th>
+                                    
+                                <td>
+                                    Recorded By:
+                                </td>
+                                    
+                                <td>
+                                    {{ item.facts.Recorded_By }}
+                                </td>
+                                    
+                            </tr>
+                        </tbody>
+                    </table> 
+                
+                </div>
             </div>
+            <div class="row">
+                <h1>
+                    Mars Hemispheres
+                </h1>
+            </div>
+            <div class="row">
+                {% for hemi in item.hemi_image_urls %}
+                <div class="col-md-6">
+                    <img class="img-responsive" src= {{ hemi.img_url }} alt="Mars hemisphere pic"/>
+                    <h3> {{ hemi.title }} </h3>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% endfor %}
+        
         </div>
+    </div>
 
 </body>
