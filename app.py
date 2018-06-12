@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from scrape_mars import *
 import pymongo
 
@@ -19,6 +19,8 @@ def scraper():
     results = scrape()
     
     collection.insert_one(results)
+
+    return redirect("..")
     
 @app.route("/")
 def home():
